@@ -1,0 +1,60 @@
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
+
+/* Custom utilities not covered by Tailwind */
+.text-primary {
+  color: #3f51b5;
+}
+
+.bg-primary {
+  background-color: #3f51b5;
+}
+
+.bg-primary-dark {
+  background-color: #303f9f;
+}
+
+.bg-primary-light {
+  background-color: #7986cb;
+}
+
+.border-primary {
+  border-color: #3f51b5;
+}
+
+.hover\:bg-primary:hover {
+  background-color: #3f51b5;
+}
+
+.hover\:bg-primary-dark:hover {
+  background-color: #303f9f;
+}
+
+.hover\:text-primary:hover {
+  color: #3f51b5;
+}
+
+.focus\:ring-primary:focus {
+  --tw-ring-color: #3f51b5;
+}
+
+.focus\:border-primary:focus {
+  border-color: #3f51b5;
+}
+
+/* Animation */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.5s ease-out;
+}

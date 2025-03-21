@@ -1,0 +1,83 @@
+@model IEnumerable<WebsiteBanHang.Models.Product>
+
+@{
+    ViewData["Title"] = "Products";
+}
+
+<div class="container py-4">
+  <div class="d-flex justify-content-between align-items-center mb-4">
+    <h2 class="mb-0"><i class="bi bi-box-seam"></i> Products</h2>
+    <a asp-action="AddProduct" class="btn btn-primary">
+      <i class="bi bi-plus-circle"></i> Add New Product
+    </a>
+  </div>
+
+  <div class="card shadow-sm">
+    <div class="card-body">
+      <div class="table-responsive">
+        <table class="table table-hover">
+          <thead>
+            <tr>
+              <th>Image</th>
+              <th>Name</th>
+              <th>Price</th>
+              <th>Description</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            @foreach (var product in Model)
+            {
+              <tr>
+                <td style="width: 80px">
+                  @if (!string.IsNullOrEmpty(product.ImageUrl))
+                  {
+                    <img src="@product.ImageUrl" alt="@product.Name" class="img-thumbnail" style="max-height: 50px" />
+                  }
+                  else
+                  {
+                    <div class="bg-light text-center p-2 rounded">
+                      <i class="bi bi-image text-muted"></i>
+                    </div>
+                  }
+                </td>
+                <td>@product.Name</td>
+                <td>@product.Price.ToString("C")</td>
+                <td>@(product.Description?.Length > 50 ? product.Description.Substring(0, 50) + "..." : product.Description)</td>
+                <td>
+                  <div class="btn-group">
+                    <a asp-action="Display" asp-route-id="@product.Id" class="btn btn-sm btn-outline-primary" title="View product details">
+                      <i class="bi bi-eye"></i>
+                    </a>
+                    <a asp-action="Update" asp-route-id="@product.Id" class="btn btn-sm btn-outline-warning" title="Edit product">
+                      <i class="bi bi-pencil"></i>
+                    </a>
+                    <a asp-action="Delete" asp-route-id="@product.Id" class="btn btn-sm btn-outline-danger" title="Delete product">
+                      <i class="bi bi-trash"></i>
+                    </a>
+                  </div>
+                </td>
+              </tr>
+            }
+          </tbody>
+        </table>
+      </div>
+      
+      @if (!Model.Any())
+      {
+        <div class="alert alert-info text-center">
+          <i class="bi bi-info-circle"></i> No products found.
+        </div>
+      }
+    </div>
+  </div>
+</div>
+
+@section Scripts {
+    <script>
+        $(document).ready(function() {
+            // Initialize tooltips
+            $('[title]').tooltip();
+        });
+    </script>
+}

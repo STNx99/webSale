@@ -1,0 +1,49 @@
+@model WebsiteBanHang.Models.Category
+
+@{
+    ViewData["Title"] = "Category Details";
+}
+
+<h1 class="text-center my-4">Category Details</h1>
+<div class="container">
+    <div class="card mb-4">
+        <div class="card-header">
+            <h4>Category</h4>
+        </div>
+        <div class="card-body">
+            <dl class="row">
+                <dt class="col-sm-3">
+                    @Html.DisplayNameFor(model => model.Name)
+                </dt>
+                <dd class="col-sm-9">
+                    @Html.DisplayFor(model => model.Name)
+                </dd>
+            </dl>
+        </div>
+    </div>
+
+    <div class="card mb-4">
+        <div class="card-header">
+            <h4>Products</h4>
+        </div>
+        <div class="card-body">
+            <div class="row">
+                @foreach (var product in Model.Products)
+                {
+                    <div class="col-md-4">
+                        <div class="card mb-4 shadow-sm">
+                            <img src="@product.ImageUrl" class="card-img-top" alt="Product Image">
+                            <div class="card-body">
+                                <h5 class="card-title">@product.Name</h5>
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+
+    <div class="text-center">
+        <a asp-action="Index" class="btn btn-secondary">Back to List</a>
+    </div>
+</div>

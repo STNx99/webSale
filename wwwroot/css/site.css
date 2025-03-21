@@ -1,0 +1,415 @@
+:root {
+  --primary-color: #3f51b5;
+  --primary-hover: #303f9f;
+  --secondary-color: #ff4081;
+  --text-color: #333;
+  --light-gray: #f5f5f5;
+  --border-radius: 8px;
+  --box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08);
+  --transition: all 0.2s ease;
+  --font-family: 'Poppins', sans-serif;
+}
+
+html {
+  font-size: 14px;
+  position: relative;
+  min-height: 100%;
+  scroll-behavior: auto; /* Giảm hiệu ứng smooth scroll mặc định */
+}
+
+@media (min-width: 768px) {
+  html {
+    font-size: 16px;
+  }
+}
+
+.btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
+  box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
+}
+
+body {
+  margin: 0;
+  font-family: var(--font-family);
+  color: var(--text-color);
+  background-color: #f8f9fa;
+  overflow-x: hidden;
+}
+
+.form-floating > .form-control-plaintext::placeholder, 
+.form-floating > .form-control::placeholder {
+  color: var(--bs-secondary-color);
+  text-align: end;
+}
+
+.form-floating > .form-control-plaintext:focus::placeholder, 
+.form-floating > .form-control:focus::placeholder {
+  text-align: start;
+}
+
+/* Layout adjustments for fixed navbar */
+.main-container {
+  padding-top: 5rem;
+  min-height: calc(100vh - 80px);
+  padding-bottom: 2rem;
+  /* Loại bỏ animation fadeIn */
+}
+
+/* Navbar styling */
+.navbar {
+  padding: 0.8rem 1rem;
+}
+
+.navbar-brand {
+  font-size: 1.5rem;
+  letter-spacing: 0.5px;
+}
+
+.nav-link {
+  font-weight: 500;
+  transition: color 0.2s ease; /* Giảm thời gian transition */
+}
+
+/* Đơn giản hóa hiệu ứng nav-link */
+.nav-link:hover {
+  color: var(--primary-color) !important;
+}
+
+/* Loại bỏ animation after cho nav-link */
+.nav-link:after {
+  display: none;
+}
+
+/* Cards */
+.card {
+  border: none;
+  border-radius: var(--border-radius);
+  box-shadow: var(--box-shadow);
+  transition: transform 0.2s ease, box-shadow 0.2s ease; /* Giảm thời gian transition */
+  margin-bottom: 1.5rem;
+}
+
+.card:hover {
+  transform: translateY(-3px); /* Giảm độ dịch chuyển */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Đơn giản hóa shadow */
+}
+
+.card-title {
+  font-weight: 600;
+  margin-bottom: 0.75rem;
+}
+
+.card-img-top {
+  border-top-left-radius: var(--border-radius);
+  border-top-right-radius: var(--border-radius);
+  height: 200px;
+  object-fit: cover;
+}
+
+/* Loại bỏ hiệu ứng zoom ảnh */
+.card:hover .card-img-top {
+  transform: none;
+}
+
+/* Buttons */
+.btn {
+  font-weight: 500;
+  padding: 0.5rem 1.2rem;
+  border-radius: var(--border-radius);
+  transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease; /* Đơn giản hóa transition */
+}
+
+/* Loại bỏ hiệu ứng shine */
+.btn::before {
+  display: none;
+}
+
+.btn-primary {
+  background-color: var(--primary-color);
+  border-color: var(--primary-color);
+}
+
+.btn-primary:hover {
+  background-color: var(--primary-hover);
+  border-color: var(--primary-hover);
+}
+
+.btn-outline-primary {
+  color: var(--primary-color);
+  border-color: var(--primary-color);
+}
+
+.btn-outline-primary:hover {
+  background-color: var(--primary-color);
+  color: white;
+}
+
+/* Forms */
+.form-control, .form-select {
+  border-radius: var(--border-radius);
+  padding: 0.75rem 1rem;
+  border: 1px solid #ced4da;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.form-control:focus, .form-select:focus {
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 0.2rem rgba(63, 81, 181, 0.15);
+}
+
+.form-floating > .form-control, .form-floating > .form-select {
+  height: calc(3.5rem + 2px);
+}
+
+.form-floating > label {
+  padding: 1rem;
+}
+
+/* Custom styling for home page */
+.hero-section {
+  background-color: white;
+  border-radius: var(--border-radius);
+  padding: 3.5rem 0;
+  margin-bottom: 2rem;
+  box-shadow: var(--box-shadow);
+  position: relative;
+  overflow: hidden;
+}
+
+/* Đơn giản hóa hiệu ứng trang trí */
+.hero-section::before,
+.hero-section::after {
+  display: none;
+}
+
+.hero-title {
+  font-weight: 700;
+  font-size: 2.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.hero-subtitle {
+  font-size: 1.2rem;
+  margin-bottom: 2rem;
+  color: #6c757d;
+}
+
+/* Loại bỏ animation cho hero text */
+
+/* Custom styling for product cards */
+.product-card {
+  height: 100%;
+}
+
+.product-card .card-body {
+  display: flex;
+  flex-direction: column;
+}
+
+.product-card .card-title {
+  margin-bottom: 0.5rem;
+}
+
+.product-card .card-text {
+  flex-grow: 1;
+}
+
+.product-price {
+  font-weight: 700;
+  color: var(--primary-color);
+  font-size: 1.2rem;
+  margin: 0.5rem 0;
+}
+
+/* Authentication pages */
+.auth-container {
+  max-width: 450px;
+  margin: 0 auto;
+}
+
+.auth-form {
+  background-color: white;
+  padding: 2rem;
+  border-radius: var(--border-radius);
+  box-shadow: var(--box-shadow);
+  position: relative;
+}
+
+/* Đơn giản hóa border gradient */
+.auth-form::before {
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 3px;
+  background-color: var(--primary-color);
+  top: 0;
+  left: 0;
+}
+
+.auth-title {
+  text-align: center;
+  margin-bottom: 1.5rem;
+  font-weight: 600;
+}
+
+.auth-subtitle {
+  text-align: center;
+  margin-bottom: 2rem;
+  color: #6c757d;
+}
+
+/* Footer */
+.footer {
+  margin-top: 3rem;
+}
+
+/* Category tags */
+.category-badge {
+  background-color: var(--light-gray);
+  color: var(--text-color);
+  padding: 0.25rem 0.75rem;
+  border-radius: 20px;
+  font-size: 0.85rem;
+  font-weight: 500;
+  margin-right: 0.5rem;
+  margin-bottom: 0.5rem;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.category-badge:hover {
+  background-color: var(--primary-color);
+  color: white;
+  transform: none; /* Loại bỏ transform */
+}
+
+/* Other elements */
+.section-title {
+  position: relative;
+  margin-bottom: 2rem;
+  font-weight: 600;
+  display: inline-block;
+}
+
+/* Đơn giản hóa underline */
+.section-title::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: -10px;
+  height: 3px;
+  width: 60%;
+  background-color: var(--primary-color);
+}
+
+.table {
+  border-radius: var(--border-radius);
+  overflow: hidden;
+  box-shadow: var(--box-shadow);
+}
+
+.pagination .page-item.active .page-link {
+  background-color: var(--primary-color);
+  border-color: var(--primary-color);
+}
+
+.pagination .page-link {
+  color: var(--primary-color);
+}
+
+/* Feature section */
+.feature-icon {
+  transition: transform 0.2s ease;
+}
+
+/* Giảm độ nâng của icon */
+.feature-card:hover .feature-icon {
+  transform: translateY(-5px);
+}
+
+/* Đơn giản hóa loading animation */
+.loading {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(255, 255, 255, 0.8);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+  opacity: 1;
+  transition: opacity 0.3s ease;
+}
+
+.loading-spinner {
+  width: 40px;
+  height: 40px;
+  border: 3px solid rgba(63, 81, 181, 0.1);
+  border-radius: 50%;
+  border-top-color: var(--primary-color);
+  animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .hero-title {
+    font-size: 2rem;
+  }
+  
+  .hero-subtitle {
+    font-size: 1rem;
+  }
+  
+  .feature-card {
+    margin-bottom: 1.5rem;
+  }
+}
+
+/* Back to top button */
+.back-to-top-btn {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-color: var(--primary-color);
+  color: white;
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  opacity: 0;
+  transition: opacity 0.2s ease;
+  z-index: 1000;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+}
+
+.back-to-top-btn.visible {
+  opacity: 0.8;
+}
+
+.back-to-top-btn:hover {
+  opacity: 1;
+  background-color: var(--primary-hover);
+}
+
+/* Utility classes */
+.text-primary {
+  color: var(--primary-color) !important;
+}
+
+.bg-primary {
+  background-color: var(--primary-color) !important;
+}
+
+.bg-light-gray {
+  background-color: var(--light-gray);
+}
