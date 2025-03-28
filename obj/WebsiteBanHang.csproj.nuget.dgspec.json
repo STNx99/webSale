@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\ASUS TUF F15\\Documents\\Bai3\\Bai3\\WebsiteBanHang_kirei_4\\WebsiteBanHang.csproj": {}
+    "C:\\Users\\Zenbook 14\\Documents\\New folder\\webSale\\WebsiteBanHang.csproj": {}
   },
   "projects": {
-    "C:\\Users\\ASUS TUF F15\\Documents\\Bai3\\Bai3\\WebsiteBanHang_kirei_4\\WebsiteBanHang.csproj": {
+    "C:\\Users\\Zenbook 14\\Documents\\New folder\\webSale\\WebsiteBanHang.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\ASUS TUF F15\\Documents\\Bai3\\Bai3\\WebsiteBanHang_kirei_4\\WebsiteBanHang.csproj",
+        "projectUniqueName": "C:\\Users\\Zenbook 14\\Documents\\New folder\\webSale\\WebsiteBanHang.csproj",
         "projectName": "WebsiteBanHang",
-        "projectPath": "C:\\Users\\ASUS TUF F15\\Documents\\Bai3\\Bai3\\WebsiteBanHang_kirei_4\\WebsiteBanHang.csproj",
-        "packagesPath": "C:\\Users\\ASUS TUF F15\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\ASUS TUF F15\\Documents\\Bai3\\Bai3\\WebsiteBanHang_kirei_4\\obj\\",
+        "projectPath": "C:\\Users\\Zenbook 14\\Documents\\New folder\\webSale\\WebsiteBanHang.csproj",
+        "packagesPath": "C:\\Users\\Zenbook 14\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Zenbook 14\\Documents\\New folder\\webSale\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\ASUS TUF F15\\AppData\\Roaming\\NuGet\\NuGet.Config"
+          "C:\\Users\\Zenbook 14\\AppData\\Roaming\\NuGet\\NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net9.0"

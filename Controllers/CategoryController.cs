@@ -5,8 +5,11 @@ using WebsiteBanHang.Repositories;
 using System.Linq;
 using System.Threading.Tasks;
 
+
 namespace WebsiteBanHang.Controllers
 {
+            
+    [Authorize (Roles = "Admin")]
     public class CategoryController : Controller
     {
         private readonly ICategoryRepository _categoryRepository;
@@ -22,6 +25,7 @@ namespace WebsiteBanHang.Controllers
             var categories = await _categoryRepository.GetAllCategoriesAsync();
             return View(categories);
         }
+        
 
         public IActionResult AddCategory()
         {

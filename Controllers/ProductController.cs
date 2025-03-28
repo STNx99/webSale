@@ -6,7 +6,7 @@ using WebsiteBanHang.Repositories;
 using System.Threading.Tasks;
 using System.Linq;
 
-
+[Authorize]
 public class ProductController : Controller
 {
   private readonly IProductRepository _productRepository;
@@ -17,7 +17,7 @@ public class ProductController : Controller
     _productRepository = productRepository;
     _categoryRepository = categoryRepository;
   }
-
+  [Authorize(Roles = "Admin")]
   public async Task<IActionResult> AddProduct()
   {
     var categories = await _categoryRepository.GetAllCategoriesAsync();
@@ -40,7 +40,7 @@ public class ProductController : Controller
     }
     return View(product);
   }
-
+  [Authorize(Roles = "Admin")]
   public async Task<IActionResult> Update(int id)
   {
     var product = await _productRepository.GetByIdAsync(id);
@@ -54,6 +54,8 @@ public class ProductController : Controller
   }
 
   [HttpPost]
+  [Authorize(Roles = "Admin")]
+
   public async Task<IActionResult> Update(Product product)
   {
     if (ModelState.IsValid)
@@ -78,6 +80,7 @@ public class ProductController : Controller
     ViewBag.Categories = new SelectList(categories, "Id", "Name");
     return View(product);
   }
+  [Authorize(Roles = "Admin")]
 
   public async Task<IActionResult> Delete(int id)
   {
@@ -90,6 +93,8 @@ public class ProductController : Controller
   }
 
   [HttpPost, ActionName("Delete")]
+  [Authorize(Roles = "Admin")]
+
   public async Task<IActionResult> DeleteConfirmed(int id)
   {
     var product = await _productRepository.GetByIdAsync(id);
@@ -102,6 +107,7 @@ public class ProductController : Controller
   }
 
   [HttpPost]
+  [Authorize(Roles = "Admin")]
   public async Task<IActionResult> AddProduct(Product product, IFormFile imageUrl)
   {
     if (ModelState.IsValid)
