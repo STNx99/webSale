@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using WebsiteBanHang.DataAccess;
+using WebsiteBanHang.Models;
 
 namespace WebsiteBanHang.Data
 {
@@ -27,14 +28,30 @@ namespace WebsiteBanHang.Data
         {
             try
             {
-                // Apply pending migrations if they exist
+                // Try migrations first; if provider-specific migrations are unavailable,
+                // fall back to EnsureCreated for first-time container deployment.
                 if (_db.Database.GetPendingMigrations().Any())
                 {
-                    _db.Database.Migrate();
+                    try
+                    {
+                        _db.Database.Migrate();
+                    }
+                    catch (Exception migrationEx)
+                    {
+                        _logger.LogWarning(migrationEx, "Migration failed. Falling back to EnsureCreated().");
+                        await _db.Database.EnsureCreatedAsync();
+                    }
+                }
+                else
+                {
+                    await _db.Database.EnsureCreatedAsync();
                 }
 
                 // Seed roles
                 await SeedRolesAsync();
+
+                // Seed sample categories and products for first run
+                await SeedCatalogDataAsync();
 
                 // Seed admin user
                 await SeedAdminUserAsync();
@@ -100,6 +117,72 @@ namespace WebsiteBanHang.Data
                 await _userManager.AddToRoleAsync(adminUser, "Admin");
                 _logger.LogInformation("Added Admin role to existing admin user");
             }
+        }
+
+        private async Task SeedCatalogDataAsync()
+        {
+            if (await _db.Categories.AnyAsync() || await _db.Products.AnyAsync())
+            {
+                _logger.LogInformation("Catalog data already exists. Skip seeding sample data.");
+                return;
+            }
+
+            var categories = new List<Category>
+            {
+                new() { Id = 0, Name = "Skincare" },
+                new() { Id = 0, Name = "Makeup" },
+                new() { Id = 0, Name = "Hair Care" }
+            };
+
+            await _db.Categories.AddRangeAsync(categories);
+            await _db.SaveChangesAsync();
+
+            var categoryByName = categories.ToDictionary(c => c.Name, c => c.Id);
+
+            var products = new List<Product>
+            {
+                new()
+                {
+                    Id = 0,
+                    Name = "Sakura Gentle Cleanser",
+                    Price = 12.99m,
+                    Description = "Gentle daily facial cleanser for sensitive skin.",
+                    CategoryId = categoryByName["Skincare"],
+                    ImageUrl = "/images/sample-cleanser.jpg"
+                },
+                new()
+                {
+                    Id = 0,
+                    Name = "Hydra Boost Serum",
+                    Price = 24.50m,
+                    Description = "Hydrating serum with lightweight texture.",
+                    CategoryId = categoryByName["Skincare"],
+                    ImageUrl = "/images/sample-serum.jpg"
+                },
+                new()
+                {
+                    Id = 0,
+                    Name = "Velvet Matte Lipstick",
+                    Price = 15.75m,
+                    Description = "Long-wear matte lipstick with rich pigment.",
+                    CategoryId = categoryByName["Makeup"],
+                    ImageUrl = "/images/sample-lipstick.jpg"
+                },
+                new()
+                {
+                    Id = 0,
+                    Name = "Silk Repair Shampoo",
+                    Price = 18.20m,
+                    Description = "Repair shampoo for dry and damaged hair.",
+                    CategoryId = categoryByName["Hair Care"],
+                    ImageUrl = "/images/sample-shampoo.jpg"
+                }
+            };
+
+            await _db.Products.AddRangeAsync(products);
+            await _db.SaveChangesAsync();
+
+            _logger.LogInformation("Sample catalog data seeded successfully.");
         }
     }
 }
